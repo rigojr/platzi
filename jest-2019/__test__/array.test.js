@@ -14,4 +14,8 @@ describe('Testing Arryas', () => {
         expect( arraies.arrayFruits() ).toHaveLength(6);
     });
 
+    it('exist a color', () => {
+        expect( arraies.arrayColors() ).toContain('azul');
+    });
+
 });
