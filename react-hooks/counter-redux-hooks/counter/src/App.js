@@ -1,25 +1,58 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { addCounter, decreaseCounter } from './redux/actions'
+import React, { Component } from 'react';
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+        search: '',
+        suggestion: []
+     };
+  }
 
-  const count = useSelector(state => state.count)
-  const dispatcher = useDispatch()
-  const add = () => dispatcher(addCounter())
-  const decrease = () => dispatcher(decreaseCounter())
+  setSearch = (e) => {
+    this.setState( prevState => ({
+      ...prevState,
+      search: e.target.value
+    } ))
+    if(this.state.search.length > 2){
+      this.callSuggestion()
+    }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h3>Counter with Redux Hooks {count}</h3>
-        <button
-          onClick={add} >ADD +1</button>
-        <button
-          onClick={decrease}>DECREASE -1</button>
-      </header>
-    </div>
-  )
+  }
+
+  callSuggestion = () => {
+    fetch(`https://www.catchpoint.com/api?q=${this.state.search}`)
+      .then( response => response.json() )
+      .then( response => 
+        this.setState( prevState => ({
+          ...prevState,
+          suggestion: [...response.data]
+        }) )
+       )
+       .catch( error )
+  }
+
+  updateInput = (sugg) => {
+    this.setState( prevState => ({
+      ...prevState,
+      search: sugg
+    }))
+  }
+
+  render() {
+
+    
+    return (
+      <div>
+        <input value={this.state.search} onChange={(e) => this.setSearch(e)} />
+        <button onClick={() => console.log(this.state.search)} >Search</button>
+        {
+          this.suggestion.length > 0 ?
+            this.suggestion.map( sugg => <button key={sugg} onClick={() => this.updateIpunt(sugg)}>sugg</button>) : null
+        }
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;
