@@ -1,6 +1,26 @@
 const compose = (...functions) => data =>
   functions.reduceRight((value, func) => func(value), data)
 
+  const attrsToString = (obj = {}) => {
+    const keys = Object.keys(obj)
+    const attrs = []
+
+    keys.forEach(key => {
+      attrs.push(`${key}="${obj[key]}"`)
+    });
+    return attrs.join('')
+  }
+
+  const tagAttres = obj => (content = "") =>
+    `<${obj.tag}${obj.attrs ? ' ' : ''}${attrsToString(obj.attrs)}>${content}</${obj.tag}>`
+  
+  const tag = t => {
+    if( typeof t === 'string')
+      tagAttres({tag: t})
+    else
+      tagAttres(t)
+  }
+  
   let description = $('#description')
   let calories = $('#calories')
   let carbs = $('#carbs')
