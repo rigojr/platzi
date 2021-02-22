@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshots testing  should have exception 1`] = `
+Object {
+  "id": Any<Number>,
+  "name": "Jose",
+}
+`;
+
+exports[`Snapshots testing first test 1`] = `
+Object {
+  "gender": "Male",
+  "id": 1,
+  "name": "Rick Sanches",
+  "status": "Human",
+}
+`;
+
+exports[`Snapshots testing testing execption 1`] = `
+Object {
+  "createAt": Any<Date>,
+  "id": Any<Number>,
+}
+`;
