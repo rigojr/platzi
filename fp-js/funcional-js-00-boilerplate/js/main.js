@@ -76,7 +76,25 @@ const compose = (...functions) => data =>
     }
     list.push(newItem)
     cleanInputs()
+    updateTotals()
     console.log(list)
+  }
+
+  const updateTotals = () => {
+    let calories = 0, carbs = 0, protein = 0
+
+    list.forEach( item => {
+      calories += item.calories
+      carbs += item.carbs
+      protein += item.carbs
+    })
+
+    $('#totals-calories').text(calories)
+    $('#totals-carbs').text(carbs)
+    $('#totals-protein').text(protein)
+
+    console.log(calories)
+
   }
 
   const cleanInputs = () => {
