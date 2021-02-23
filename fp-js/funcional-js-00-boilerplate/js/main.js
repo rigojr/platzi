@@ -16,14 +16,13 @@ const compose = (...functions) => data =>
   
   const tag = t => {
     if( typeof t === 'string')
-      tagAttres({tag: t})
-    else
-      tagAttres(t)
+      return tagAttres({tag: t})
+    return tagAttres(t)
   }
 
   const tableRowTag = tag('tr')
-  // const tableRow = items => tableRowTag(tableCells(items))
-  const tableRow = items => compose(tableRowTag, tableCells)(items)
+  const tableRow = items => tableRowTag(tableCells(items))
+  // const tableRow = items => compose(tableRowTag, tableCells(items))(items)
 
   const tableCell = tag('td')
   const tableCells = items => items.map(tableCell).join('')
@@ -77,7 +76,7 @@ const compose = (...functions) => data =>
     list.push(newItem)
     cleanInputs()
     updateTotals()
-    console.log(list)
+    renderItems()
   }
 
   const updateTotals = () => {
@@ -93,8 +92,6 @@ const compose = (...functions) => data =>
     $('#totals-carbs').text(carbs)
     $('#totals-protein').text(protein)
 
-    console.log(calories)
-
   }
 
   const cleanInputs = () => {
@@ -102,4 +99,13 @@ const compose = (...functions) => data =>
     calories.val('')
     carbs.val('')
     protein.val('')
+  }
+
+  const renderItems = () => {
+    $('tbody').empty()
+    list.forEach( item => {
+      $('tbody').append(
+        tableRow([item.description, item.calories, item.carbs, item.protein])
+        )
+    })
   }
