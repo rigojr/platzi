@@ -4,7 +4,7 @@ import '../styles/components/Footer.css'
 
 const Footer: React.FC = () => {
   return (
-    <footer>
+    <footer className="Footer">
       <p className="Footer-title">{TITLE_WEB_APP}</p>
       <p className="Footer-copy">{COPY_RIGHT_TEXT}</p>
     </footer>
