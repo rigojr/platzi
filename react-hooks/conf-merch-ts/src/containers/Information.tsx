@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { INPUT_INFORMATION_PH as input_PH }  from '../common/types';
 import '../styles/components/Information.css';
 
@@ -27,7 +28,9 @@ const Information: React.FC = () => {
             Regresar
           </div>
           <div className="Information-next">
-            Pagar
+            <Link to="/checkout/payment">
+              Pagar
+            </Link>
           </div>
         </div>
       </div>
