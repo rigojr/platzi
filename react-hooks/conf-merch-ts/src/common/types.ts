@@ -29,5 +29,15 @@ export interface IProduct {
 
 export const TITLE_WEB_APP = 'PlatziConf Merch';
 export const COPY_RIGHT_TEXT = 'Todos los derechos reservados';
-
+export const INPUT_INFORMATION_PH = {
+  NAME: 'Nombre Completo',
+  EMAIL: 'Correo Electronico',
+  ADDRESS: 'Direccion',
+  APT: 'Apto',
+  CITY: 'Ciudad,',
+  COUNTRY: 'Pais',
+  STATE: 'Estado',
+  POSTAL_CODE: 'Codigo Postal',
+  PHONE: 'Telefono',
+}
 // TYPES
