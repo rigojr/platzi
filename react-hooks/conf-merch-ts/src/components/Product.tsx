@@ -1,7 +1,7 @@
 import React from 'react';
 import { IProduct } from '../common/types';
 
-const Product: React.FC<IProduct> = ({product, key}) => {
+const Product: React.FC<IProduct> = ({product, key, handleAddToCart}) => {
   return (
     <div className="Products-item" key={key}>
       <img src={product.image} alt={product.title}/>
@@ -11,7 +11,7 @@ const Product: React.FC<IProduct> = ({product, key}) => {
         </h2>
         <p>{product.description}</p>
       </div>
-      <button type="button">Comprar</button>
+      <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
     </div>
   );
 }

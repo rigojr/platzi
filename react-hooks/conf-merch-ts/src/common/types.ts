@@ -23,6 +23,20 @@ export interface IProducts {
 export interface IProduct {
   product: Product;
   key: string | number;
+  handleAddToCart: (product: Product) => void
+}
+
+// CONTEXT TYPES
+
+export interface IInitialState {
+  cart: Product[];
+  products: Product[];
+}
+
+export interface IUseInitialState {
+  state: IInitialState;
+  addToCart: (product: Product) => void;
+  removeFromCart: (product: Product) => void;
 }
 
 // CONSTANTS
