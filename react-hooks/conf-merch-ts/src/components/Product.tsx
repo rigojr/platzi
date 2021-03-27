@@ -1,9 +1,9 @@
 import React from 'react';
 import { IProduct } from '../common/types';
 
-const Product: React.FC<IProduct> = ({product, key, handleAddToCart}) => {
+const Product: React.FC<IProduct> = ({product, handleAddToCart}) => {
   return (
-    <div className="Products-item" key={key}>
+    <div className="Products-item">
       <img src={product.image} alt={product.title}/>
       <div className="Product-item-info">
         <h2>

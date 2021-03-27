@@ -34,7 +34,6 @@ export interface IProducts {
 
 export interface IProduct {
   product: Product;
-  key: string | number;
   handleAddToCart: (product: Product) => void
 }
 

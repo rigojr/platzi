@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { INPUT_INFORMATION_PH as input_PH }  from '../common/types';
 import '../styles/components/Information.css';
 import AppContext from '../context/AppContext';
@@ -9,6 +9,7 @@ const Information: React.FC = () => {
   const { state, addToBuyer } = useContext(AppContext) as IUseInitialState;
   const form = useRef(null);
   const { cart } = state;
+  const history = useHistory();
 
   const handleSubmit = () => {
     const formData = new FormData(form.current || undefined);
@@ -24,6 +25,7 @@ const Information: React.FC = () => {
       'phone': formData.get('phone'),
     };
     addToBuyer(buyer);
+    history.push('/checkout/payment');
   }
 
   return (
