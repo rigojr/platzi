@@ -10,6 +10,18 @@ export interface Product {
   description: string;
 }
 
+export interface Buyer {
+  name: string | FormDataEntryValue | null;
+  email: string | FormDataEntryValue | null;
+  address: string | FormDataEntryValue | null;
+  apto: string | FormDataEntryValue | null;
+  city: string | FormDataEntryValue | null;
+  country: string | FormDataEntryValue | null;
+  state: string | FormDataEntryValue | null;
+  cp: string | FormDataEntryValue | null;
+  phone: string | FormDataEntryValue | null;
+}
+
 // COMPONENTS INTERFACES
 
 export interface ILayout {
@@ -37,6 +49,7 @@ export interface IUseInitialState {
   state: IInitialState;
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
+  addToBuyer: (buyer: Buyer) => void;
 }
 
 // CONSTANTS
