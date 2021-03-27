@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import initialState from '../initialState';
-import { Product, Buyer } from '../common/types';
+import { Product, Buyer, Order } from '../common/types';
 
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
@@ -17,10 +17,15 @@ const useInitialState = () => {
     setState(Object.assign({}, state, { buyer: [...state.buyer, payload] }))
   }
 
+  const addNewOrder = (payload: Order) => {
+    setState(Object.assign({}, state, { orders: [...state.orders, payload] }))
+  }
+
   return {
     addToCart,
     removeFromCart,
     addToBuyer,
+    addNewOrder,
     state
   }
 };

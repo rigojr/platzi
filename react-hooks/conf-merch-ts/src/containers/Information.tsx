@@ -62,8 +62,8 @@ const Information: React.FC = () => {
       </div>
       <div className="Information-sidebar">
         <h3>Pedidos:</h3>
-        {cart.map((product: Product) => (
-          <div className="Information-item">
+        {cart.map((product: Product, index) => (
+          <div className="Information-item" key={index}>
             <div className="Information-element">
               <h4>{product.title}</h4>
               <span>${product.price}</span>

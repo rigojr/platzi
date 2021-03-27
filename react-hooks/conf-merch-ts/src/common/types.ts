@@ -1,4 +1,5 @@
 import React from "react";
+import { OnCaptureData } from 'react-paypal-button';
 
 // REGULAR INTERFACES
 
@@ -22,6 +23,12 @@ export interface Buyer {
   phone: string | FormDataEntryValue | null;
 }
 
+export interface Order {
+  buyer: Buyer,
+  product: Product[],
+  payment: OnCaptureData
+}
+
 // COMPONENTS INTERFACES
 
 export interface ILayout {
@@ -42,6 +49,7 @@ export interface IProduct {
 export interface IInitialState {
   cart: Product[];
   products: Product[];
+  buyer: Buyer;
 }
 
 export interface IUseInitialState {
@@ -49,6 +57,7 @@ export interface IUseInitialState {
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
   addToBuyer: (buyer: Buyer) => void;
+  addNewOrder: (order: Order) => void;
 }
 
 // CONSTANTS
