@@ -28,7 +28,6 @@ const Payment: React.FC = () => {
   } as ButtonStylingOptions;
 
   const handlePaymentSuccess = (data: OnCaptureData) => {
-    console.log(data);
     if (data.status === 'COMPLETED') {
       const newOrder: Order = {
         buyer: buyer,
