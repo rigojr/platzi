@@ -1,0 +1,26 @@
+{
+  "name": "jsbase",
+  "version": "1.0.0",
+  "description": "this is a sample project to test npm",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "platzi"
+  ],
+  "author": "Jose Salas <@rigojr>",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "date-fns": "^2.21.1",
+    "webpack": "^5.35.1"
+  },
+  "optionalDependencies": {
+    "eslint": "^7.25.0"
+  }
+}
