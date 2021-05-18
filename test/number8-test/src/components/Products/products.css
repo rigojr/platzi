@@ -1,0 +1,30 @@
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  max-width: 50%;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+.product-card__img {
+  width: 150px;
+  height: 150px;
+}
+
+.product-card__details p span {
+  margin-left: 20px;
+  font-size: 8px;
+}
+.product-card__btns  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card__btns a {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: aquamarine;
+  color: black;
+  border-radius: 20px;
+}
