@@ -1,26 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Category } from '../Category';
 import { List, Item } from './style';
-import { categories as mockCategories } from '../../assets/db.json';
 import { ICategory } from '../../common/types/shared';
 
-export const ListOfCategories: React.FC = () => {
+const useCategoriesData = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://petgram-server-edsf8xpy2.now.sh/categories')
       .then(res => res.json())
-      .then(res => setCategories(res));
+      .then(res => {
+        setLoading(false);
+        setCategories(res);
+      });
   }, []);
 
-  return (
-    <List>
-      {categories.length > 0 &&
+  return { categories, loading };
+};
+
+export const ListOfCategories: React.FC = () => {
+  const [showFixed, setShowFixed] = useState<boolean>(false);
+  const { categories, loading } = useCategoriesData();
+  useLayoutEffect(() => {
+    const onScroll = () => {
+      const newShowFixed = window.scrollY > 200;
+      showFixed != newShowFixed && setShowFixed(newShowFixed);
+    };
+    document.addEventListener('scroll', onScroll);
+  }, [showFixed]);
+
+  const renderList = (fixed: boolean) => (
+    <List fixed={fixed}>
+      {loading ? (
+        <Item key="loading">
+          <Category />
+        </Item>
+      ) : (
+        categories.length > 0 &&
         categories.map(category => (
           <Item key={category.id}>
             <Category {...category} />
           </Item>
-        ))}
+        ))
+      )}
     </List>
+  );
+
+  return (
+    <>
+      {renderList(false)}
+      {showFixed && renderList(true)}
+    </>
   );
 };
