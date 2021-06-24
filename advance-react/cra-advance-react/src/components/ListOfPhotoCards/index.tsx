@@ -1,12 +1,33 @@
 import React from 'react';
 import { PhotoCard } from '../PhotoCard';
+import { IPhotoCard } from '../../common/types/shared';
+import { graphql, QueryResult } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
-export const ListOfPhotoCard: React.FC = () => {
+const withPhotos = graphql(gql`
+  query getPhotos {
+    photos {
+      id
+      categoryId
+      src
+      likes
+      userId
+      liked
+    }
+  }
+`);
+
+export const ListOfPhotoCardComponent: React.FC = props => {
+  const {
+    data: { photos },
+  } = props as QueryResult;
   return (
     <ul>
-      {[1, 2, 3, 4].map(photo => (
-        <PhotoCard key={photo} id={photo} />
+      {(photos as IPhotoCard[]).map(({ id, ...photos }) => (
+        <PhotoCard key={id} id={id} {...photos} />
       ))}
     </ul>
   );
 };
+
+export const ListOfPhotoCard = withPhotos(ListOfPhotoCardComponent);

@@ -5,3 +5,12 @@ export interface ICategory {
   cover: string;
   path: string;
 }
+
+export interface IPhotoCard {
+  id: string;
+  categoryId: number;
+  liked: boolean;
+  likes: number;
+  src: string;
+  userId: string;
+}
