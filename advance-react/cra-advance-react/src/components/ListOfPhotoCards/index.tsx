@@ -1,26 +1,12 @@
 import React from 'react';
 import { PhotoCard } from '../PhotoCard';
 import { IPhotoCard } from '../../common/types/shared';
-import { graphql, QueryResult } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import { ChildProps } from '../../hoc/withPhotos';
 
-const withPhotos = graphql(gql`
-  query getPhotos {
-    photos {
-      id
-      categoryId
-      src
-      likes
-      userId
-      liked
-    }
-  }
-`);
-
-export const ListOfPhotoCardComponent: React.FC = props => {
-  const {
-    data: { photos },
-  } = props as QueryResult;
+export const ListOfPhotoCardComponent: React.FC<ChildProps> = ({ data: { loading, photos, error }, sampleProp }) => {
+  console.log(sampleProp);
+  if (loading) return <div>Loading</div>;
+  if (error) return <div>Error</div>;
   return (
     <ul>
       {(photos as IPhotoCard[]).map(({ id, ...photos }) => (
@@ -29,5 +15,3 @@ export const ListOfPhotoCardComponent: React.FC = props => {
     </ul>
   );
 };
-
-export const ListOfPhotoCard = withPhotos(ListOfPhotoCardComponent);

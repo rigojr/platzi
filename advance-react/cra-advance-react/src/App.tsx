@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListOfCategories } from './components/ListOfCategories';
 import { GlobalStyle } from './styles/GlobalStyles';
-import { ListOfPhotoCard } from './components/ListOfPhotoCards';
+import { ListOfPhotoCard } from './containers/ListOfPhotoCards';
 import { Logo } from './components/Logo';
 
 const App: React.FC = () => {
@@ -10,7 +10,7 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Logo />
       <ListOfCategories />
-      <ListOfPhotoCard />
+      <ListOfPhotoCard categoryId={2} sampleProp />
     </>
   );
 };
