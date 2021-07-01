@@ -41,7 +41,7 @@ export const ListOfCategories: React.FC = () => {
         categories.length > 0 &&
         categories.map(category => (
           <Item key={category.id}>
-            <Category {...category} />
+            <Category {...category} path={`/pet/${category.id}`} />
           </Item>
         ))
       )}

@@ -1,5 +1,5 @@
 export interface ICategory {
-  id: number;
+  id: string;
   name: string;
   emoji: string;
   cover: string;

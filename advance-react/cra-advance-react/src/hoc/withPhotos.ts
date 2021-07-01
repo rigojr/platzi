@@ -20,7 +20,7 @@ type Response = {
 };
 
 type Variables = {
-  categoryId: number;
+  categoryId: string;
 };
 
 export interface InputProps extends Variables {
