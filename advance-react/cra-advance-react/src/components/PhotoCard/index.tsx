@@ -5,6 +5,7 @@ import { useNearScreen } from '../../hooks/useNearScreen';
 import { IPhotoCard } from '../../common/types/shared';
 import { FavButton } from '../FavButton';
 import { ToggleLikeMutation } from '../../containers/ToggleLikeMutation';
+import { Link } from '@reach/router';
 
 const DEFAULT_IMG =
   'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
@@ -23,11 +24,11 @@ export const PhotoCard: React.FC<IPhotoCard> = ({ id, likes = 0, src = DEFAULT_I
     <Article ref={ref}>
       {show ? (
         <>
-          <a href={`/?details=${id}`}>
+          <Link to={`/details/${id}`}>
             <ImgWrapper>
               <Img src={src} alt="Photo" />
             </ImgWrapper>
-          </a>
+          </Link>
           <ToggleLikeMutation>
             {(toggleLike: any) => {
               const handleFavClick = () => {

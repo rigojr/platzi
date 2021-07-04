@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, Image } from './style';
+import { Link, Image } from './style';
 const DEFAULT_IMAGE = 'https://imgur.com/dJa0Hpl.jpg';
 
 interface Props {
@@ -8,11 +8,11 @@ interface Props {
   emoji?: string;
 }
 
-export const Category: React.FC<Props> = ({ cover = DEFAULT_IMAGE, path, emoji = '?' }) => {
+export const Category: React.FC<Props> = ({ cover = DEFAULT_IMAGE, path = '/', emoji = '?' }) => {
   return (
-    <Anchor href={path}>
+    <Link to={path}>
       <Image src={cover} alt="category" />
       {emoji}
-    </Anchor>
+    </Link>
   );
 };
