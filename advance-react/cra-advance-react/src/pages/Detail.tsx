@@ -8,6 +8,5 @@ interface IPropsDetail extends RouteComponentProps {
 }
 
 export const Detail: React.FC<IPropsDetail> = ({ detailId = '1' }) => {
-  console.log(detailId);
   return <PhotoCardWithQuery id={detailId} />;
 };
