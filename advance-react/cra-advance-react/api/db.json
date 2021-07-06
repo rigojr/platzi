@@ -21,6 +21,13 @@
       ],
       "avatar": "https://gravatar.com/avatar/3bccd59be0a57b39bdd9b2760702795e",
       "email": "dani@gmail.com"
+    },
+    {
+      "id": "eafff510-ddee-11eb-b6c3-e1058eaf40e4",
+      "password": "$2b$10$mhxbpBHfFapXw.r/XMBpbuSJzk6Kxs4pkbrbIlAqOrXo2vykS2pgG",
+      "favs": [],
+      "avatar": "https://gravatar.com/avatar/0397c01ba5063fd8a073b5a713edf862",
+      "email": "jsalas@test.com"
     }
   ],
   "categories": [
