@@ -10,9 +10,11 @@ interface ICredentials {
 interface IUserForm {
   onSubmit: (credentials: ICredentials) => void;
   title: string;
+  error?: string;
+  disabled?: boolean;
 }
 
-export const UserForm: React.FC<IUserForm> = ({ onSubmit, title }) => {
+export const UserForm: React.FC<IUserForm> = ({ disabled = false, error, onSubmit, title }) => {
   const email = useInputValue('');
   const password = useInputValue('');
 
@@ -29,10 +31,11 @@ export const UserForm: React.FC<IUserForm> = ({ onSubmit, title }) => {
     <>
       <Title>{title}</Title>
       <Form onSubmit={handleSubmit}>
-        <Input placeholder="Email" type="email" {...email} />
-        <Input placeholder="Password" type="password" {...password} />
-        <Button>{title}</Button>
+        <Input disabled={disabled} placeholder="Email" type="email" {...email} />
+        <Input disabled={disabled} placeholder="Password" type="password" {...password} />
+        <Button disabled={disabled}>{title}</Button>
       </Form>
+      {error && <span>{error}</span>}
     </>
   );
 };

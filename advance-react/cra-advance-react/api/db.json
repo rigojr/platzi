@@ -28,6 +28,27 @@
       "favs": [],
       "avatar": "https://gravatar.com/avatar/0397c01ba5063fd8a073b5a713edf862",
       "email": "jsalas@test.com"
+    },
+    {
+      "id": "4347fa80-de51-11eb-bd1c-d53c23ed0494",
+      "password": "$2b$10$fsXiAD8dstn6nFGEC9vu1ejcfg.S5A.SFg0v.zAkcMBZqya/l.w0a",
+      "favs": [],
+      "avatar": "https://gravatar.com/avatar/a5fb82dddb6b4a4373ac56a1dd54838a",
+      "email": "jsalas+1@gmail.com"
+    },
+    {
+      "id": "7a0cf980-de51-11eb-bd1c-d53c23ed0494",
+      "password": "$2b$10$KkaEceU3Wn4zlTHlY9xRLu2Gmrkxke4knCveELnrjUJjXAVFhtst2",
+      "favs": [],
+      "avatar": "https://gravatar.com/avatar/45d3d4d2d495c0130f5822606ad0cf83",
+      "email": "jsalas+2@gmail.com"
+    },
+    {
+      "id": "149d05f0-de5a-11eb-bd1c-d53c23ed0494",
+      "password": "$2b$10$quEvKRAKDSTVJQGOjhoe3uzCYdCzK4Y6zhX/GhUHfdH6XzAm55ZMG",
+      "favs": [],
+      "avatar": "https://gravatar.com/avatar/65e9a0f24e44bb5787b289682a885353",
+      "email": "jsalas1@test.com"
     }
   ],
   "categories": [
