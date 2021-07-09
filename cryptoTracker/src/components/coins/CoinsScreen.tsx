@@ -1,57 +1,63 @@
-import React, { Component } from 'react'
-import { View, Text, Pressable, StyleSheet, NavigatorIOS } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-
-
+import React, { useEffect, useState } from 'react';
+import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../common/RootStackParams';
+import { ICoin } from '../../common/type';
+import Http from '../../libs/http';
 interface ICoinDetailScreenProps {
-  navigation: StackNavigationProp
+  navigation: StackNavigationProp<RootStackParamList, 'CoinMain'>;
 }
 
-const CoinsScreen: React.FC<> = () => {
+const CoinsScreen: React.FC<ICoinDetailScreenProps> = ({ navigation }) => {
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    Http.instance
+      .get('https://api.coinlore.net/api/tickers/')
+      .then(resp => {
+        console.log(resp.data);
+        setCoins(resp.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const handlePress = () => {
+    if (navigation) navigation.navigate('CoinDetail');
+  };
+
   return (
-    
+    <View style={styles.container}>
+      <Text>Coins Screen</Text>
+      <FlatList
+        data={coins}
+        renderItem={({ item }) => {
+          const coin = item as ICoin;
+          return (
+            <View>
+              <Text>{coin.name}</Text>
+            </View>
+          );
+        }}
+      />
+    </View>
   );
-}
+};
 
 export default CoinsScreen;
-
-// class CoinsScreen extends Component {
-
-//   handlePress = () => {
-//     console.log("go to details", this.props);
-//     const { navigation } = this.props;
-//     if (navigation) navigation.navigate('CoinDetail')
-//   }
-
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>
-//           Coins Screen
-//         </Text>
-//         <Pressable onPress={this.handlePress} style={styles.btn}>
-//           <Text style={styles.btnText}>Ir a detail</Text>
-//         </Pressable>
-//       </View>
-//     );
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red"
+    backgroundColor: 'red',
   },
   btn: {
     padding: 8,
-    backgroundColor: "blue",
+    backgroundColor: 'blue',
     borderRadius: 8,
-    margin: 16
+    margin: 16,
   },
   btnText: {
-    color: "#fff",
-    textAlign: "center"
-  }
-})
-
-// export default CoinsScreen;
+    color: '#fff',
+    textAlign: 'center',
+  },
+});

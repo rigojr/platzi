@@ -5,7 +5,7 @@ import CoinDetailScreen from './CoinDetailScreen';
 
 const { Navigator, Screen } = createStackNavigator();
 
-const CoinsStack = () => {
+const CoinsStack: React.FC = () => {
   return (
     <Navigator>
       <Screen name="Coins" component={CoinsScreen} />

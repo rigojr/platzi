@@ -1,17 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Text } from 'react-native';
 
-class CoinDetailScreen extends Component {
-
-  render() {
-    return (
-      <View>
+const CoinDetailScreen: React.FC = () => {
+  return (
+    <View>
         <Text>
           Coin Detail Screen
         </Text>
       </View>
-    );
-  }
+  );
 }
 
 export default CoinDetailScreen;
