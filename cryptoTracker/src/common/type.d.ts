@@ -11,5 +11,5 @@ export interface ICoin {
 
 export interface IMarket {
   name: string;
-  price_usd: string;
+  price_usd: number;
 }

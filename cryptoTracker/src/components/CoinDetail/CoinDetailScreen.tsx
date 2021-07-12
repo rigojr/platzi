@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { View, Text, Image, StyleSheet, SectionList, FlatList } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { View, Text, Image, StyleSheet, SectionList, FlatList, Pressable } from 'react-native';
 import { CoinDetailProps } from '../../common/RootStackParams';
 import { ICoin } from '../../common/type';
 import usePayLoading from '../../hooks/usePayloading';
@@ -7,8 +7,9 @@ import Http from '../../libs/http';
 import colors from '../../res/colors';
 import { getSymbolIcon } from '../../utils';
 import CoinMarketDetail from './CoinMarketDetail';
+import Storage from '../../libs/storage';
 
-const { charade, white } = colors;
+const { charade, white, picton, carmine } = colors;
 
 const CoinDetailScreen: React.FC<CoinDetailProps> = ({
   navigation,
@@ -19,6 +20,7 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
   const { setOptions } = navigation;
   const { id, name, symbol, market_cap_usd, volume24, percent_change_24h } = coin as ICoin;
   const [markets, loading, setMarkets, setLoading] = usePayLoading([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     setOptions({ title: symbol });
@@ -56,11 +58,33 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
     return sections;
   }, [coin]);
 
+  const handleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite();
+    } else {
+      addFavorite();
+    }
+  };
+
+  const addFavorite = async () => {
+    const stringCoin = JSON.stringify(coin);
+    const key = `favorite-${id}`;
+    const stored = await Storage.instance.store(key, stringCoin);
+    if (stored) setIsFavorite(true);
+  };
+
+  const removeFavorite = () => {};
+
   return (
     <View style={styles.container}>
       <View style={styles.subHeader}>
-        <Image style={styles.iconImage} source={{ uri: getSymbolIcon(name) }} />
-        <Text style={styles.titleText}>{name}</Text>
+        <View style={styles.row}>
+          <Image style={styles.iconImage} source={{ uri: getSymbolIcon(name) }} />
+          <Text style={styles.titleText}>{name}</Text>
+        </View>
+        <Pressable onPress={handleFavorite} style={[styles.btnFavorite, isFavorite ? styles.btnFavoriteRemove : styles.btnFavoriteAdd]}>
+          <Text style={styles.btnFavoriteText}>{isFavorite ? 'Remove Favorite' : 'Add Favorite'}</Text>
+        </Pressable>
       </View>
       <SectionList
         style={styles.section}
@@ -101,11 +125,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: charade,
   },
+  row: {
+    flexDirection: 'row',
+  },
   subHeader: {
     backgroundColor: 'rgba(0,0,0,0.1)',
     flexDirection: 'row',
     padding: 16,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   iconImage: {
     width: 25,
@@ -140,6 +168,19 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     color: white,
     marginBottom: 16,
+  },
+  btnFavorite: {
+    padding: 8,
+    borderRadius: 8,
+  },
+  btnFavoriteAdd: {
+    backgroundColor: picton,
+  },
+  btnFavoriteRemove: {
+    backgroundColor: carmine,
+  },
+  btnFavoriteText: {
+    color: white,
   },
 });
 
