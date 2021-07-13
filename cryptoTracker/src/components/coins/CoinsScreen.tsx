@@ -7,6 +7,7 @@ import CoinItem from './CoinItem';
 import colors from '../../res/colors';
 import { ICoin } from '../../common/type';
 import CoinsSearch from './CoinsSearch';
+
 interface ICoinDetailScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'CoinMain'>;
 }

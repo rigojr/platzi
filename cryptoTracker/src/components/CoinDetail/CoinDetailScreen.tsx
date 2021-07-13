@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, Text, Image, StyleSheet, SectionList, FlatList, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, SectionList, FlatList, Pressable, Alert } from 'react-native';
 import { CoinDetailProps } from '../../common/RootStackParams';
 import { ICoin } from '../../common/type';
 import usePayLoading from '../../hooks/usePayloading';
@@ -21,6 +21,7 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
   const { id, name, symbol, market_cap_usd, volume24, percent_change_24h } = coin as ICoin;
   const [markets, loading, setMarkets, setLoading] = usePayLoading([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const key = `favorite-${id}`;
 
   useEffect(() => {
     setOptions({ title: symbol });
@@ -38,6 +39,15 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
         console.log(err);
         setLoading(err);
       });
+  }, [coin]);
+
+  useEffect(() => {
+    Storage.instance
+      .get(key)
+      .then(res => {
+        if (res) setIsFavorite(true);
+      })
+      .catch(err => console.log(err));
   }, [coin]);
 
   const getSections = useMemo(() => {
@@ -68,12 +78,27 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
 
   const addFavorite = async () => {
     const stringCoin = JSON.stringify(coin);
-    const key = `favorite-${id}`;
     const stored = await Storage.instance.store(key, stringCoin);
-    if (stored) setIsFavorite(true);
+    if (stored) setIsFavorite(stored);
   };
 
-  const removeFavorite = () => {};
+  const removeFavorite = () => {
+    Alert.alert('Remove favorite', 'Are you sure?', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Remove',
+        onPress: async () => {
+          const removed = await Storage.instance.remove(key);
+          if (removed) setIsFavorite(!removed);
+        },
+        style: 'destructive',
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -104,7 +129,7 @@ const CoinDetailScreen: React.FC<CoinDetailProps> = ({
       <Text style={styles.marketTitle}>Markets</Text>
 
       <FlatList
-        keyExtractor={item => item}
+        keyExtractor={(item, i) => `${item}-${i}`}
         style={styles.list}
         horizontal
         data={markets}
